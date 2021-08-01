@@ -1,0 +1,75 @@
+/*
+Vijaya Anisetti
+vijaya_anisetti@student.uml.edu
+File: hw3.css
+Assignment: Creating an Interactive Dynamic Table
+This file consists fo the css required to make the table pretty. 
+Use css properties to give the table a clean look. 
+Couldn't entirely figure out how to make the table scroll and how to delete old table
+*/
+
+/*
+first few properties set the colors and format the form and table*/
+
+header{
+    color:#31124e;
+    font-family:monospace;
+    font-weight: bold;
+    text-align: center;
+
+
+}
+
+input[type=number] {
+    width: 10%;
+    padding: 12px 20px;
+    margin:  12px 20px;
+    }
+  
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 12px 20px;
+    cursor: pointer;
+    }
+  
+label{
+    color: rgb(150, 101, 179);
+    font-family:monospace;
+    font-size: 18px;
+    padding-left: 25px;
+  }
+  
+  /*
+  Did this so that the form and table could be viewed on the same page.*/
+form{
+    float:left;
+    display: flex;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    float:left;
+    clear:both;
+    }
+
+    /*
+    Trying to figure out how to make the table scroll */
+.tablearea{
+overflow: scroll;
+}
+
+/*
+Added some styling to make the table more pleasant*/
+table tr:nth-child(1){background-color: #dcb6f1;}
+table td:nth-child(1){background-color: #dcb6f1;}
+
+th, td{
+    padding: 10px 20px;
+    border: 1px solid #000;
+    }
+

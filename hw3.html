@@ -1,0 +1,185 @@
+<!--
+Vijaya Anisetti
+vijaya_anisetti@student.uml.edu
+File: hw3.html
+Assignment: Creating an Interactive Dynamic Table
+Created a wepage that has a dynamically changing multiplication table based on the user's 
+input. This file consists of the html and javascript code that allows me to create the 
+table and carry out the multiplication functions. 
+-->
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Dynamic Multiplication Table</title>
+        <link rel="stylesheet" href="hw3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <div id="header">
+			<header>
+                <h1>
+                    Dynamic Multiplication Table
+                </h1>
+            </header>
+        </div>
+
+  
+                
+        <div class = "wrapper">
+        <!--Code for form was taken from W3Schools Website-->
+            <form id="form3"action="#">
+
+                <label for="lowcol">Low Range for Column </label><br>
+                <input type="number"  id="lowcol" name="lowcol"><br>
+
+                <label for="highcol">High Range for Column </label><br>
+                <input type="number"  id="highcol" name="highcol"><br>
+
+                <label for="lowrow">Low Range for Row </label><br>
+                <input type="number"  id="lowrow" name="lowrow"><br>
+
+                <label for="highrow">High Range for Row  </label><br>
+                <input type="number"  id="highrow" name="highrow"><br><br>
+
+                <input type="button"  id = "button" value="Submit" onclick="error_check()"></button>
+                </form>
+        </div>
+         <p id="demo"></p>
+
+        <script>
+            //set the values and make sure that the inputs are within the right range
+            function error_check() {
+                var lowcol = document.getElementById("form3").elements[0].value;
+                var highcol = document.getElementById("form3").elements[1].value;
+                var lowrow = document.getElementById("form3").elements[2].value;
+                var highrow = document.getElementById("form3").elements[3].value;
+                let text;
+                var lowcol_valid = false;
+                var lowrow_valid = false;
+                var highcol_valid = false;
+                var highrow_valid = false;
+
+                
+                if(lowcol >= -50 && lowcol <= 50) {
+                    if (lowcol < 0 && lowcol >= -50) {
+                        lowcol = Number(lowcol * -1);
+                    }
+                    lowcol_valid = true;
+                }
+
+                
+                if(lowrow >= -50 && lowrow <= 50) {
+                    if (lowrow < 0 && lowrow >= -50) {
+                        lowrow = Number(lowrow * -1);
+                    }
+                    lowrow_valid = true;
+                }
+
+
+                if(highcol >= -50 && highcol <= 50) {
+                    if (highcol < 0 && highcol >= -50) {
+                        highcol = Number(highcol * -1);
+                    }
+                    highcol_valid = true;
+                }
+
+
+                if(highrow >= -50 && highrow <= 50) {
+                    if (highrow < 0 && highrow >= -50) {
+                        highrow = Number(highrow * -1);
+                    }   
+                    highrow_valid = true;
+                }
+
+                
+                if ((highcol < lowcol)) {
+                    highcol_valid = false;
+                    lowcol_valid = false;
+                }
+
+                if ((highrow < lowrow)) {
+                highrow_valid = false;
+                lowrow_valid = false;
+                }
+
+                if (lowcol_valid === true && highcol_valid === true &&
+                lowrow_valid === true && highrow_valid === true) {
+                text = "Input Valid";
+                document.getElementById("demo").innerHTML = text;
+                create_table(lowcol, highcol, lowrow, highrow);
+                }
+
+                //error responses for invaid inputs
+                if (lowcol_valid === false || highcol_valid === false ||
+                lowrow_valid === false || highrow_valid === false) {
+
+                    if ((highcol < lowcol)) {
+                    text = "Input Invalid. Make sure the end size is larger than the start size";
+                    }
+    
+                    else if ((highrow < lowrow)) {
+                    text = "Input Invalid. Make sure the end size is larger than the start size";
+                    }
+
+                    else {
+                    text = "Input Invalid. Make sure a number value between -50 and 50 is entered for each option."
+                    }
+                    document.getElementById("demo").innerHTML = text;
+                }   
+            }
+
+            //with a friends suggestion I used https://stackoverflow.com/questions/14643617/create-table-using-javascript
+            //to help me create a table
+            function create_table(lowcol, highcol, lowrow, highrow) {
+
+            var num = Number(lowcol);
+            var num2 = Number(lowrow);
+
+            console.log(num);
+            console.log(num2);
+
+            
+            var tablearea = document.getElementById('tablearea');
+            var tbl = document.createElement('table');
+            tbl.style.width  = '100px';
+            tbl.style.border = '2px solid black';
+
+            
+            for(var i = lowrow-1; i <= highrow; i++){
+                var tr = tbl.insertRow();
+
+                for(var j = lowcol-1; j <= highcol; j++) {
+
+                    var td = tr.insertCell();
+
+                    if(i == lowrow-1 && j == lowcol-1) {
+                        td.appendChild(document.createTextNode(''));
+                    }
+
+                    else if (i == (lowrow-1)) {
+                        td.appendChild(document.createTextNode((num)));
+                        num = num + 1;
+                    }
+
+                    else if (j == (lowcol-1)) {
+                        td.appendChild(document.createTextNode((num2)));
+                        num2 = num2 + 1;
+                    }
+
+                    else {
+                        td.appendChild(document.createTextNode(i*j));
+                        if (i == lowrow-1 && j != lowcol-1) {
+                            td.appendChild(document.createTextNode(i));
+                        }
+                    }
+                td.style.border = '2px solid black';
+                }
+            }       
+        tablearea.appendChild(tbl);
+        }
+        </script>
+        <div id = "tablearea">
+        </div>
+    </body>
+</html>
